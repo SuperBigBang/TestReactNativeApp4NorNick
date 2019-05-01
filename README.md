@@ -1,5 +1,6 @@
 # TestReactNativeApp4NorNick
 Front-End. Test app on React Native.
+
 Описание хода работы:
 1) Установлены следующие инструменты для работы:
 - IDE WebStorm (+Использован AndroidSDK из Android Studio для запуска приложения)
