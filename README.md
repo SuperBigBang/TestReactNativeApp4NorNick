@@ -8,6 +8,6 @@
 2) Создан бланк приложения React Native, протестирован на устройстве с Android 9.0, решены проблемы возникшие на первых запусках.
 3) Создан прототип приложения (используя сервис figma) https://www.figma.com/file/14vadjLNHzQXG46Pr2g8x0/TestReactNativeApp4NorNick?node-id=0%3A1
 
-![Screenshot](prototype.gif)
+![Screenshot](resources/gitHubResources/prototype.gif)
 
 => В процессе: Создание главного экрана приложения
