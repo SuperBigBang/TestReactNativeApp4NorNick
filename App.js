@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Platform, StyleSheet, Text, View} from 'react-native';
+import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -19,11 +19,12 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   render() {
+      let pic = {uri: 'https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/resources/localTestResources/april.png?raw=true'};
     return (
       <View style={styles.container}>
-        <Text style={styles.welcome}>Welcome to React Native!{"\n"}Ok, welcome, welcome)</Text>
-        <Text style={styles.instructions}>To get started, edit App.js</Text>
-        <Text style={styles.instructions}>{instructions}</Text>
+          <Text style={styles.welcome}>Доброе утро!</Text>
+          <Text style={styles.date}>01.04.2019</Text>
+          <Image source={pic} style={styles.image}/>
       </View>
     );
   }
@@ -41,9 +42,14 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     margin: 10,
   },
-  instructions: {
+    date: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
+    image: {
+        width: 150,
+        height: 150,
+        margin: 5
+    }
 });
