@@ -8,6 +8,7 @@
 
 import React, {Component} from 'react';
 import {Image, Platform, StyleSheet, Text, View} from 'react-native';
+import {colors, metrics} from "./utils/themes";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -39,34 +40,36 @@ const styles = StyleSheet.create({
         flex: 1,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: colors.background,
     },
     containerText: {
         flex: 1,
         justifyContent: 'flex-start',
     alignItems: 'center',
-    backgroundColor: '#F5FCFF',
+        backgroundColor: colors.background,
   },
   welcome: {
-      fontSize: 24,
+      fontSize: metrics.textHeaders,
     textAlign: 'center',
     margin: 10,
+      color: colors.text,
       fontWeight: 'bold'
   },
     date: {
     textAlign: 'center',
-    color: '#333333',
+        color: colors.textSecondary,
     marginBottom: 5,
+        fontSize: metrics.textSize
   },
     containerImage: {
         flex: 2,
         justifyContent: 'flex-start',
         alignItems: 'center',
-        backgroundColor: '#F5FCFF',
+        backgroundColor: colors.background,
     },
     image: {
-        width: 150,
-        height: 150,
+        width: metrics.imageWidth,
+        height: metrics.imageHeight,
         margin: 5
     },
 });
