@@ -22,34 +22,51 @@ export default class App extends Component<Props> {
       let pic = {uri: 'https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/resources/localTestResources/april.png?raw=true'};
     return (
       <View style={styles.container}>
-          <Text style={styles.welcome}>Доброе утро!</Text>
-          <Text style={styles.date}>01.04.2019</Text>
-          <Image source={pic} style={styles.image}/>
+          <View style={styles.containerText}>
+              <Text style={styles.welcome}>Доброе утро!</Text>
+              <Text style={styles.date}>01.04.2019</Text>
+          </View>
+          <View style={styles.containerImage}>
+              <Image source={pic} style={styles.image}/>
+          </View>
       </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    justifyContent: 'center',
+    container: {
+        flex: 1,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
+    containerText: {
+        flex: 1,
+        justifyContent: 'flex-start',
     alignItems: 'center',
     backgroundColor: '#F5FCFF',
   },
   welcome: {
-    fontSize: 20,
+      fontSize: 24,
     textAlign: 'center',
     margin: 10,
+      fontWeight: 'bold'
   },
     date: {
     textAlign: 'center',
     color: '#333333',
     marginBottom: 5,
   },
+    containerImage: {
+        flex: 2,
+        justifyContent: 'flex-start',
+        alignItems: 'center',
+        backgroundColor: '#F5FCFF',
+    },
     image: {
         width: 150,
         height: 150,
         margin: 5
-    }
+    },
 });
