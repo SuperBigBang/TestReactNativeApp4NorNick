@@ -1,5 +1,5 @@
 /**
- * Sample React Native App
+ * Sample React Native MainActivity
  * https://github.com/facebook/react-native
  *
  * @format
@@ -9,6 +9,12 @@
 import React, {Component} from 'react';
 import {Image, Platform, StyleSheet, Text, View} from 'react-native';
 import {colors, metrics} from "./utils/themes";
+import {
+    getDataFromNetworkAPI,
+    getDateTextFromModel,
+    getImageFromModel,
+    getWelcomeTextFromModel
+} from "./controller/MainActivityController";
 
 const instructions = Platform.select({
   ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
@@ -18,17 +24,18 @@ const instructions = Platform.select({
 });
 
 type Props = {};
-export default class App extends Component<Props> {
+export default class MainActivity extends Component<Props> {
   render() {
-      let pic = {uri: 'https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/js/resources/localTestResources/april.png?raw=true'};
+      getDataFromNetworkAPI();
     return (
       <View style={styles.container}>
           <View style={styles.containerText}>
-              <Text style={styles.welcome}>Доброе утро!</Text>
-              <Text style={styles.date}>01.04.2019</Text>
+              <Text style={styles.welcome}>{getWelcomeTextFromModel()}</Text>
+              <Text style={styles.date}>{getDateTextFromModel()}</Text>
           </View>
           <View style={styles.containerImage}>
-              <Image source={pic} style={styles.image}/>
+              <Image source={{uri: getImageFromModel().imagePath}}
+                     style={{width: getImageFromModel().imageWidth, height: getImageFromModel().imageHeight}}/>
           </View>
       </View>
     );
@@ -66,10 +73,5 @@ const styles = StyleSheet.create({
         justifyContent: 'flex-start',
         alignItems: 'center',
         backgroundColor: colors.background,
-    },
-    image: {
-        width: metrics.imageWidth,
-        height: metrics.imageHeight,
-        margin: 5
-    },
+    }
 });
