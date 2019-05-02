@@ -19,7 +19,7 @@ const instructions = Platform.select({
 type Props = {};
 export default class App extends Component<Props> {
   render() {
-      let pic = {uri: 'https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/resources/localTestResources/april.png?raw=true'};
+      let pic = {uri: 'https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/js/resources/localTestResources/april.png?raw=true'};
     return (
       <View style={styles.container}>
           <View style={styles.containerText}>
