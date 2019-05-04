@@ -7,7 +7,7 @@
  */
 
 import React, {Component} from 'react';
-import {Image, Platform, StyleSheet, Text, View} from 'react-native';
+import {ActivityIndicator, Image, StyleSheet, Text, View} from 'react-native';
 import {colors, metrics} from "./utils/themes";
 import {
     getDataFromNetworkAPI,
@@ -16,18 +16,29 @@ import {
     getWelcomeTextFromModel
 } from "./controller/MainActivityController";
 
-const instructions = Platform.select({
-  ios: 'Press Cmd+R to reload,\n' + 'Cmd+D or shake for dev menu',
-  android:
-    'Double tap R on your keyboard to reload,\n' +
-    'Shake or press menu button for dev menu',
-});
-
+let context;
 type Props = {};
 export default class MainActivity extends Component<Props> {
-  render() {
-      getDataFromNetworkAPI();
-    return (
+    constructor(props) {
+        super(props);
+        this.state = {isLoading: true};
+        context = this;
+    }
+
+    componentDidMount() {
+        getDataFromNetworkAPI()
+    }
+
+    render() {
+        if (this.state.isLoading) {
+            return (
+                <View style={{flex: 1, padding: 20}}>
+                    <ActivityIndicator/>
+                </View>
+            )
+        }
+
+        return (
       <View style={styles.container}>
           <View style={styles.containerText}>
               <Text style={styles.welcome}>{getWelcomeTextFromModel()}</Text>
@@ -41,6 +52,12 @@ export default class MainActivity extends Component<Props> {
     );
   }
 }
+
+function changeState() {
+    context.setState({isLoading: false});
+}
+
+export {changeState}
 
 const styles = StyleSheet.create({
     container: {

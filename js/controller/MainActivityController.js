@@ -1,8 +1,9 @@
+import {changeState} from "../MainActivity";
 import {getDateText, getImage, getWelcomeText} from "../model/MainActivityModel";
 import {getDataFromServer} from "../network/NetworkAPI";
 
 function getDataFromNetworkAPI() {
-    getDataFromServer()
+    getDataFromServer();
 }
 
 function getWelcomeTextFromModel() {
@@ -17,4 +18,14 @@ function getImageFromModel() {
     return getImage();
 }
 
-export {getDataFromNetworkAPI, getWelcomeTextFromModel, getDateTextFromModel, getImageFromModel};
+function changeLoadingStateOfMainActivity() {
+    changeState();
+}
+
+export {
+    getDataFromNetworkAPI,
+    getWelcomeTextFromModel,
+    getDateTextFromModel,
+    getImageFromModel,
+    changeLoadingStateOfMainActivity
+};

@@ -1,24 +1,42 @@
+import {changeLoadingStateOfMainActivity} from "../controller/MainActivityController";
 import {setMainActivityModelData} from "../model/MainActivityModel";
 
 function getDataFromServer() {
+    let successResponse = false;
+    let dataSource = null;
+    URL = "http://10.0.2.2:3000";
     //processing...
-    let successResponse = false; //no connection
-
-    setMainActivityModelData(
-        successResponse ? ("Доброе утро/Добрый день") : ("Привет!"),
-        successResponse ? ("01.04.2019/03.05.2019") : ("нет ответа от сервера"),
-        successResponse ? (
+    fetch(URL)
+        .then((response) => response.json())
+        .then((responseJson) => {
+            dataSource = responseJson;
+            successResponse = true;
+            setMainActivityModelData(
+                dataSource.welcomeText,
+                dataSource.date,
                 {
-                    imagePath: "https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/js/resources/localTestResources/april.png?raw=true",
+                    imagePath: URL + dataSource.imageUri,
                     imageWidth: 150,
                     imageHeight: 150
-                })
-            : ({
-                imagePath: "https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/js/resources/noconnection.png?raw=true",
-                imageWidth: 104,
-                imageHeight: 77
-            })
-    )
+                },
+                successResponse);
+            changeLoadingStateOfMainActivity();
+        })
+        .catch((error) => {
+            alert(error);
+            successResponse = false;
+            setMainActivityModelData(
+                "Привет!",
+                "нет ответа от сервера",
+                {
+                    imagePath: "https://github.com/SuperBigBang/TestReactNativeApp4NorNick/blob/master/js/resources/noconnection.png?raw=true",
+                    imageWidth: 104,
+                    imageHeight: 77
+                },
+                successResponse
+            );
+            changeLoadingStateOfMainActivity();
+        });
 }
 
 export {getDataFromServer}
