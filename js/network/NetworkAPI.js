@@ -4,8 +4,8 @@ import {setMainActivityModelData} from "../model/MainActivityModel";
 function getDataFromServer() {
     let successResponse = false;
     let dataSource = null;
-    URL = "http://10.0.2.2:3000"; //for local test on android virtual device
-    let URLNET = "https://wonderful-donkey-35.localtunnel.me"; //for test with real device (change to actual url)
+    URL = "https://10.0.2.2:3000"; //for local test on android virtual device
+    let URLNET = "https://serious-seahorse-16.localtunnel.me/"; //for test with real device (change to actual url)
     //processing...
     fetch(URLNET, { //set URL first!
         method: 'GET',
@@ -15,6 +15,12 @@ function getDataFromServer() {
         },
     }).then((response) => response.json())
         .then((responseJson) => {
+            if (responseJson.welcomeText == null) {
+                throw {
+                    code: 'SERVER_CONNECTION_PROBLEM',
+                    message: responseJson.toString()
+                }
+            }
             dataSource = responseJson;
             successResponse = true;
             setMainActivityModelData(
@@ -29,7 +35,6 @@ function getDataFromServer() {
             changeLoadingStateOfMainActivity();
         })
         .catch((error) => {
-            console.error(error);
             successResponse = false;
             setMainActivityModelData(
                 "Привет!",
@@ -42,6 +47,22 @@ function getDataFromServer() {
                 successResponse
             );
             changeLoadingStateOfMainActivity();
+            //if there was a problem with server
+            try {
+                if (navigator && navigator.onLine || error.message === "404") {
+                    throw {
+                        code: 'SERVER_CONNECTION_PROBLEM',
+                        message: 'Проблема подключения к серверу, нет ответа...'
+                    }
+                } else { // if there is a problem with internet
+                    throw {
+                        code: 'INTERNET_CONNECTION_ERROR',
+                        message: 'Проблема с интернет подключением, возможно включен автономный режим...'
+                    }
+                }
+            } catch (e) {
+                alert(e.message + "\nОшибка: " + error.message)
+            }
         });
 }
 
