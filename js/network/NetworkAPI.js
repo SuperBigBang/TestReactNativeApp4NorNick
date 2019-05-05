@@ -4,10 +4,10 @@ import {setMainActivityModelData} from "../model/MainActivityModel";
 function getDataFromServer() {
     let successResponse = false;
     let dataSource = null;
-    URL = "https://10.0.2.2:3000"; //for local test on android virtual device
+    URL = "http://10.0.2.2:3000"; //for local test on android virtual device
     let URLNET = "https://serious-seahorse-16.localtunnel.me/"; //for test with real device (change to actual url)
     //processing...
-    fetch(URLNET, { //set URL first!
+    fetch(URL, { //set URL first!
         method: 'GET',
         headers: {
             Accept: 'application/json',
@@ -27,7 +27,7 @@ function getDataFromServer() {
                 dataSource.welcomeText,
                 dataSource.date,
                 {
-                    imagePath: URLNET + dataSource.imageUri, //set URL first!
+                    imagePath: URL + dataSource.imageUri, //set URL first!
                     imageWidth: 150,
                     imageHeight: 150
                 },
