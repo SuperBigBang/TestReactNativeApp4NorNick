@@ -4,10 +4,16 @@ import {setMainActivityModelData} from "../model/MainActivityModel";
 function getDataFromServer() {
     let successResponse = false;
     let dataSource = null;
-    URL = "http://10.0.2.2:3000";
+    URL = "http://10.0.2.2:3000"; //for local test on android virtual device
+    let URLNET = "https://wonderful-donkey-35.localtunnel.me"; //for test with real device (change to actual url)
     //processing...
-    fetch(URL)
-        .then((response) => response.json())
+    fetch(URLNET, { //set URL first!
+        method: 'GET',
+        headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+        },
+    }).then((response) => response.json())
         .then((responseJson) => {
             dataSource = responseJson;
             successResponse = true;
@@ -15,7 +21,7 @@ function getDataFromServer() {
                 dataSource.welcomeText,
                 dataSource.date,
                 {
-                    imagePath: URL + dataSource.imageUri,
+                    imagePath: URLNET + dataSource.imageUri, //set URL first!
                     imageWidth: 150,
                     imageHeight: 150
                 },
@@ -23,7 +29,7 @@ function getDataFromServer() {
             changeLoadingStateOfMainActivity();
         })
         .catch((error) => {
-            alert(error);
+            console.error(error);
             successResponse = false;
             setMainActivityModelData(
                 "Привет!",
